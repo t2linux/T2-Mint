@@ -82,7 +82,9 @@ case "$verinput" in
 		;;
 esac
 
-flavourcap=`echo ${flavour:0:1} | tr  '[a-z]' '[A-Z]'`${flavour:1}
+firstChar=$(echo "$flavour" | cut -c1 | tr '[a-z]' '[A-Z]')
+restOfString=$(echo "$flavour" | cut -c2-)
+flavourcap="${firstChar}${restOfString}"
 
 echo -e "\nDownloading ${flavourcap} ${ver}"
 echo -e "\nPart 1"
