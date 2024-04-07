@@ -82,7 +82,9 @@ case "$verinput" in
 		;;
 esac
 
-flavourcap=`echo ${flavour:0:1} | tr  '[a-z]' '[A-Z]'`${flavour:1}
+firstChar=$(echo "$flavour" | cut -c1 | tr '[a-z]' '[A-Z]')
+restOfString=$(echo "$flavour" | cut -c2-)
+flavourcap="${firstChar}${restOfString}"
 
 if [ ! -f ${iso}.z01 ]; then
 	echo -e "\nDownloading Part 1 for ${flavourcap} ${ver}"
