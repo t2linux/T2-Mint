@@ -76,7 +76,8 @@ apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="
 
 echo >&2 "===]> Info: Install the T2 kernel... "
 
-apt-get install linux-t2=KVER-${CODENAME}
+apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
+  linux-t2=KVER-${CODENAME}
 
 echo >&2 "===]> Info: Install window manager... "
 
