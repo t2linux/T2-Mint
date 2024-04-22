@@ -2,6 +2,8 @@
 
 set -eu -o pipefail
 
+CODENAME=jammy
+
 echo >&2 "===]> Info: Configure environment... "
 
 mount none -t proc /proc
@@ -11,17 +13,17 @@ mount none -t devpts /dev/pts
 export HOME=/root
 export LC_ALL=C
 
-echo "ubuntu-jammy-live" >/etc/hostname
+echo "ubuntu-${CODENAME}-live" >/etc/hostname
 
 echo >&2 "===]> Info: Configure and update apt... "
 
 cat <<EOF >/etc/apt/sources.list
-deb http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
-deb-src http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
-deb-src http://archive.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
-deb-src http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/ ${CODENAME} main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu/ ${CODENAME} main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/ ${CODENAME}-security main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu/ ${CODENAME}-security main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/ ${CODENAME}-updates main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu/ ${CODENAME}-updates main restricted universe multiverse
 EOF
 apt-get update
 
@@ -32,6 +34,7 @@ apt-get install -y systemd-sysv gnupg curl wget
 mkdir -p /etc/apt/sources.list.d
 curl -s --compressed "https://adityagarg8.github.io/t2-ubuntu-repo/KEY.gpg" | gpg --dearmor | tee /etc/apt/trusted.gpg.d/t2-ubuntu-repo.gpg >/dev/null
 curl -s --compressed -o /etc/apt/sources.list.d/t2.list "https://adityagarg8.github.io/t2-ubuntu-repo/t2.list"
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/t2-ubuntu-repo.gpg] https://github.com/AdityaGarg8/t2-ubuntu-repo/releases/download/${CODENAME} ./" | tee -a /etc/apt/sources.list.d/t2.list
 apt-get update
 
 echo >&2 "===]> Info: Configure machine-id and divert... "
@@ -66,10 +69,15 @@ apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="
   grub2 \
   nautilus-admin
 
-curl -L https://github.com/t2linux/T2-Ubuntu-Kernel/releases/download/vKVER-PREL/linux-headers-KVER-${ALTERNATIVE}_KVER-PREL_amd64.deb > /tmp/headers.deb
-curl -L https://github.com/t2linux/T2-Ubuntu-Kernel/releases/download/vKVER-PREL/linux-image-KVER-${ALTERNATIVE}_KVER-PREL_amd64.deb > /tmp/image.deb
-file /tmp/*
-apt install /tmp/headers.deb /tmp/image.deb
+#curl -L https://github.com/t2linux/T2-Ubuntu-Kernel/releases/download/vKVER-PREL/linux-headers-KVER-${ALTERNATIVE}_KVER-PREL_amd64.deb > /tmp/headers.deb
+#curl -L https://github.com/t2linux/T2-Ubuntu-Kernel/releases/download/vKVER-PREL/linux-image-KVER-${ALTERNATIVE}_KVER-PREL_amd64.deb > /tmp/image.deb
+#file /tmp/*
+#apt install /tmp/headers.deb /tmp/image.deb
+
+echo >&2 "===]> Info: Install the T2 kernel... "
+
+apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
+  linux-t2=KVER-${CODENAME}
 
 echo >&2 "===]> Info: Install window manager... "
 
