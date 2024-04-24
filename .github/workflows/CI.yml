@@ -53,7 +53,7 @@ jobs:
 
       - name: Release
         if: github.ref == 'refs/heads/kubuntuMainline'
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           #files: ${{ github.workspace }}/ISO/*.tar.gz
           #files: ${{ github.workspace }}/ISO/*.iso
