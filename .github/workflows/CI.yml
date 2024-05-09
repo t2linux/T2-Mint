@@ -11,6 +11,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Free up disk space for the CI
+        uses: AdityaGarg8/remove-unwanted-software@v3
+        with:
+          remove-android: 'true'
+          remove-dotnet: 'true'
+          remove-haskell: 'true'
+
       - name: Build
         run: sudo ./build.sh cinnamon
 
@@ -73,6 +80,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Free up disk space for the CI
+        uses: AdityaGarg8/remove-unwanted-software@v3
+        with:
+          remove-android: 'true'
+          remove-dotnet: 'true'
+          remove-haskell: 'true'
+
       - name: Build
         run: sudo ./build.sh mate
 
@@ -130,6 +144,13 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+
+      - name: Free up disk space for the CI
+        uses: AdityaGarg8/remove-unwanted-software@v3
+        with:
+          remove-android: 'true'
+          remove-dotnet: 'true'
+          remove-haskell: 'true'
 
       - name: Build
         run: sudo ./build.sh xfce

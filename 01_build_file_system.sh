@@ -8,7 +8,9 @@ mount "linuxmint-${MINT_VERSION}-${FLAVOUR}-64bit.iso" /mnt
 cp /mnt/casper/filesystem.squashfs "${ROOT_PATH}"
 unsquashfs "${ROOT_PATH}/filesystem.squashfs"
 mv squashfs-root "${CHROOT_PATH}"
-
+rm "${ROOT_PATH}"/filesystem.squashfs
+umount /mnt
+rm "${ROOT_PATH}/linuxmint-${MINT_VERSION}-${FLAVOUR}-64bit.iso"
 
 echo >&2 "===]> Info: Creating chroot environment... "
 mount --bind /dev "${CHROOT_PATH}/dev"
