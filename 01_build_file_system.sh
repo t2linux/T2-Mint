@@ -3,7 +3,7 @@ set -eu -o pipefail
 
 echo >&2 "===]> Info: Download ISO and Unsquash FS"
 cd "${ROOT_PATH}"
-wget "https://mirrors.edge.kernel.org/linuxmint/stable/${MINT_VERSION}/linuxmint-${MINT_VERSION}-${FLAVOUR}-64bit.iso"
+wget -q "https://mirrors.edge.kernel.org/linuxmint/stable/${MINT_VERSION}/linuxmint-${MINT_VERSION}-${FLAVOUR}-64bit.iso"
 mount "linuxmint-${MINT_VERSION}-${FLAVOUR}-64bit.iso" /mnt
 cp /mnt/casper/filesystem.squashfs "${ROOT_PATH}"
 unsquashfs "${ROOT_PATH}/filesystem.squashfs"
