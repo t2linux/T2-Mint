@@ -63,12 +63,12 @@ apt-get autoremove -y
 
 echo >&2 "===]> Info: Cleanup the chroot environment... "
 
-truncate -s 0 /etc/machine-id
-rm /sbin/initctl
-dpkg-divert --rename --remove /sbin/initctl
-apt-get clean
-rm -rf /tmp/* ~/.bash_history
-rm -rf /tmp/setup_files
+truncate -s 0 /etc/machine-id || true
+rm /sbin/initctl || true
+dpkg-divert --rename --remove /sbin/initctl || true
+apt-get clean || true
+rm -rf /tmp/* ~/.bash_history || true
+rm -rf /tmp/setup_files || true
 
 umount -lf /dev/pts
 umount -lf /sys
