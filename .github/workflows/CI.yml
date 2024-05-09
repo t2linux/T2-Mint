@@ -21,7 +21,7 @@ jobs:
           remove-codeql: 'true'
 
       - name: Build
-        run: sudo ./build_in_docker.sh cinnamon
+        run: sudo ./build.sh cinnamon
 
       - name: print sha256sum
         run: cat output/sha256*
@@ -82,7 +82,7 @@ jobs:
           remove-codeql: 'true'
 
       - name: Build
-        run: sudo ./build_in_docker.sh mate
+        run: sudo ./build.sh mate
 
       - name: print sha256sum
         run: cat output/sha256*
@@ -139,7 +139,7 @@ jobs:
           remove-codeql: 'true'
 
       - name: Build
-        run: sudo ./build_in_docker.sh xfce
+        run: sudo ./build.sh xfce
 
       - name: print sha256sum
         run: cat output/sha256*

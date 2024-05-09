@@ -80,7 +80,7 @@ echo -e "\nCreating ISO"
 isofinal=$RANDOM
 zip -F ${iso}.zip --out ${isofinal}.zip > /dev/null
 unzip ${isofinal}.zip > /dev/null
-mv $HOME/Downloads/repo/${iso}.iso $HOME/Downloads
+mv $HOME/Downloads/home/runner/work/T2-Mint/T2-Mint/${iso}.iso $HOME/Downloads
 
 echo -e "\nVerifying sha256 checksums"
 
@@ -105,7 +105,7 @@ echo -e "\nError: Failed to verify sha256 checksums of the ISO"
 rm $HOME/Downloads/${iso}.iso
 fi
 
-rm -r $HOME/Downloads/repo
+rm -r $HOME/Downloads/home
 rm $HOME/Downloads/${isofinal}.zip
 rm $HOME/Downloads/${iso}.z??
 
