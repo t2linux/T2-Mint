@@ -1,16 +1,16 @@
-# T2-Ubuntu
+# T2-Mint
 
-The ISOs from this repo should allow you to install Ubuntu without using an external keyboard or mouse on a T2 Mac.
+The ISOs from this repo should allow you to install Linux Mint without using an external keyboard or mouse on a T2 Mac.
 
-![CI](https://github.com/t2linux/T2-Ubuntu/actions/workflows/CI.yml/badge.svg?branch=jammy)
+![CI](https://github.com/t2linux/T2-Mint/actions/workflows/CI.yml/badge.svg?branch=main)
 
 **If this repo helped you in any way, consider inviting a coffee to the people in the [credits](https://github.com/AdityaGarg8/T2-Ubuntu#credits), [link](https://wiki.t2linux.org/contribute/).**
 
-Ubuntu ISO with Apple T2 patches built-in. Now we also support kubuntu thanks to [@lemmyg](https://github.com/lemmyg)!
+Linux Mint ISO with Apple T2 patches built-in.
 
 Apple T2 drivers are integrated with this iso. 
 
-This repo is a rework of the great work done by [@mikeeq](https://github.com/mikeeq/mbp-fedora). It originally was [@marcosfad's mbp-ubuntu repo](https://github.com/marcosfad/mbp-ubuntu) and has been transferred to [t2linux](https://github.com/t2linux).
+This repo is a based on [T2-Ubuntu](https://github.com/t2linux/T2-Ubuntu.git).
 
 Kernel is being used from - <https://github.com/t2linux/T2-Ubuntu-Kernel>
 
@@ -26,12 +26,12 @@ Bootloader is configure correctly out of the box. No workaround needed.
 ```bash
 diskutil list # found which number has the USB
 diskutil umountDisk /dev/diskX
-sudo gdd bs=4M if=ubuntu-20.04-5.6.10-mbp.iso of=/dev/diskX conv=fdatasync status=progress
+sudo gdd bs=4M if=linuxmint-21.3-cinnamon-6.8.9-t2-jammy.iso of=/dev/diskX conv=fdatasync status=progress
 ```
 4. Boot in Recovery mode and allow booting unknown OS
 5. Restart and immediately press the option key until the Logo come up
 6. Select "EFI Boot" (the third option was the one that worked for me)
-7. Launch Ubuntu Live
+7. Launch Linux Mint Live
 8. Use Ubiquity to install (just click on it)
 9. Select the options that work for you and use for the partition the following setup:
     * Leave the efi boot as preselected by the installer, unless you require a [separate efi partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).

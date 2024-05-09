@@ -1,20 +1,21 @@
 #!/bin/bash
 set -eu -o pipefail
 
-echo >&2 "===]> Info: Checkout bootstrap... "
-debootstrap \
-  --arch=amd64 \
-  --variant=minbase \
-  jammy \
-  "${CHROOT_PATH}" \
-  http://archive.ubuntu.com/ubuntu/
+echo >&2 "===]> Info: Download ISO and Unsquash FS"
+cd "${ROOT_PATH}"
+wget "https://mirrors.edge.kernel.org/linuxmint/stable/${MINT_VERSION}/linuxmint-${MINT_VERSION}-${FLAVOUR}-64bit.iso"
+mount "linuxmint-${MINT_VERSION}-${FLAVOUR}-64bit.iso" /mnt
+cp /mnt/casper/filesystem.squashfs "${ROOT_PATH}"
+unsquashfs "${ROOT_PATH}/filesystem.squashfs"
+mv squashfs-root "${CHROOT_PATH}"
+
 
 echo >&2 "===]> Info: Creating chroot environment... "
 mount --bind /dev "${CHROOT_PATH}/dev"
 mount --bind /run "${CHROOT_PATH}/run"
 
 cp -r "${ROOT_PATH}/files" "${CHROOT_PATH}/tmp/setup_files"
-chroot "${CHROOT_PATH}" /bin/bash -c "KERNEL_VERSION=${KERNEL_VERSION} /tmp/setup_files/chroot_build.sh"
+chroot "${CHROOT_PATH}" /bin/bash -c "KERNEL_VERSION=${KERNEL_VERSION} CODENAME=${CODENAME} /tmp/setup_files/chroot_build.sh"
 
 echo >&2 "===]> Info: Cleanup the chroot environment... "
 # In docker there is no run?
