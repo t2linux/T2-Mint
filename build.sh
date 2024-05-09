@@ -104,7 +104,7 @@ do
   zip -s 1500m "${ROOT_PATH}/output/linuxmint-${MINT_VERSION}-${FLAVOUR}-${KERNEL_VERSION}-${ALTERNATIVE}.zip" "${ROOT_PATH}/linuxmint-${MINT_VERSION}-${FLAVOUR}-${KERNEL_VERSION}-${ALTERNATIVE}.iso"
 done
 ## Calculate sha256 sums of built ISO
-sha256sum "${ROOT_PATH}"/*.iso >"${ROOT_PATH}/output/sha256-linuxmint-${MINT_VERSION}"
+sha256sum "${ROOT_PATH}"/*.iso >"${ROOT_PATH}/output/sha256-linuxmint-${MINT_VERSION}-${FLAVOUR}"
 
 find ./ | grep ".iso"
 find ./ | grep ".zip"
