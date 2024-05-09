@@ -48,16 +48,6 @@ jobs:
           echo unzip cd.zip
           EOF
 
-      - name: Compress ISO
-        run: |
-          cd ${{ github.workspace }}
-          mkdir ISO
-          mv ${{ github.workspace }}/*.iso ${{ github.workspace }}/ISO
-          cd ISO
-          ISONAME=$(ls ${{ github.workspace }}/ISO | grep .iso | rev | cut -c 5- | rev)
-          tar -czvf ${ISONAME}.tar.gz ${ISONAME}.iso
-          ls -l
-
       - name: Get the ISO script
         run: |
           sudo cp ${{ github.workspace }}/.github/workflows/iso.sh ${{ github.workspace }}/output/iso.sh
@@ -117,16 +107,6 @@ jobs:
           echo unzip cd.zip
           EOF
 
-      - name: Compress ISO
-        run: |
-          cd ${{ github.workspace }}
-          mkdir ISO
-          mv ${{ github.workspace }}/*.iso ${{ github.workspace }}/ISO
-          cd ISO
-          ISONAME=$(ls ${{ github.workspace }}/ISO | grep .iso | rev | cut -c 5- | rev)
-          tar -czvf ${ISONAME}.tar.gz ${ISONAME}.iso
-          ls -l
-
       - name: Release
         if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
@@ -181,16 +161,6 @@ jobs:
           cat livecd-${{ env.isotag }}-t2.z?? > cd.zip
           echo unzip cd.zip
           EOF
-
-      - name: Compress ISO
-        run: |
-          cd ${{ github.workspace }}
-          mkdir ISO
-          mv ${{ github.workspace }}/*.iso ${{ github.workspace }}/ISO
-          cd ISO
-          ISONAME=$(ls ${{ github.workspace }}/ISO | grep .iso | rev | cut -c 5- | rev)
-          tar -czvf ${ISONAME}.tar.gz ${ISONAME}.iso
-          ls -l
 
       - name: Release
         if: github.ref == 'refs/heads/main'
