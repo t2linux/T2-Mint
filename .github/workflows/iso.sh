@@ -27,27 +27,34 @@ set -e
 
 cd $HOME/Downloads
 
-latest=$(curl -sL https://github.com/t2linux/T2-Ubuntu/releases/latest/ | grep "<title>Release" | awk -F " " '{print $2}' )
+latest=$(curl -sL https://github.com/t2linux/T2-Mint/releases/latest/ | grep "<title>Release" | awk -F " " '{print $2}' )
 latestkver=$(echo $latest | cut -d "v" -f 2 | cut -d "-" -f 1)
 
 cat <<EOF
 
-Choose the flavour of Ubuntu you wish to install:
+Choose the flavour of Linux Mint you wish to install:
 
-1. Ubuntu
-2. Kubuntu
+1. Cinnamon
+2. Xfce
+3. MATE
 
-Type your choice (1 or 2) from the above list and press return.
+Type your choice (1,2 or 3) from the above list and press return.
 EOF
 
 read flavinput
 
 case "$flavinput" in
 	(1)
-		flavour=ubuntu
+		flavour=cinnamon
+  		flavourcap=Cinnamon
 		;;
 	(2)
-		flavour=kubuntu
+		flavour=xfce
+		flavourcap=Xfce
+		;;
+	(3)
+		flavour=mate
+    	flavourcap=MATE
 		;;
 	(*)
 		echo "Invalid input. Aborting!"
@@ -55,46 +62,18 @@ case "$flavinput" in
 		;;
 esac
 
-cat <<EOF
-
-Choose the version of Ubuntu you wish to install:
-
-1. 22.04 LTS - Jammy Jellyfish
-2. 24.04 LTS - Noble Numbat
-
-Type your choice (1 or 2) from the above list and press return.
-EOF
-
-read verinput
-
-case "$verinput" in
-	(1)
-		iso="${flavour}-22.04-${latestkver}-t2-jammy"
-		ver="22.04 LTS - Jammy Jellyfish"
-		;;
-	(2)
-		iso="${flavour}-24.04-${latestkver}-t2-noble"
-		ver="24.04 LTS  - Noble Numbat"
-		;;
-	(*)
-		echo "Invalid input. Aborting!"
-		exit 1
-		;;
-esac
-
-firstChar=$(echo "$flavour" | cut -c1 | tr '[a-z]' '[A-Z]')
-restOfString=$(echo "$flavour" | cut -c2-)
-flavourcap="${firstChar}${restOfString}"
+iso="linuxmint-21.3-${flavour}-${latestkver}-t2-jammy"
+ver="Linux Mint 21.3 \"Virginia\" - ${flavourcap} Edition"
 
 if [ ! -f ${iso}.z01 ]; then
-	echo -e "\nDownloading Part 1 for ${flavourcap} ${ver}"
+	echo -e "\nDownloading Part 1 for ${ver}"
 	echo -e "\n"
-	curl -#L https://github.com/t2linux/T2-Ubuntu/releases/download/${latest}/${iso}.z01 > ${iso}.z01
+	curl -#L https://github.com/t2linux/T2-Mint/releases/download/${latest}/${iso}.z01 > ${iso}.z01
 fi
 if [ ! -f ${iso}.zip ]; then
-	echo -e "\nDownloading Part 2 for ${flavourcap} ${ver}"
+	echo -e "\nDownloading Part 2 for ${ver}"
 	echo -e "\n"
-	curl -#L https://github.com/t2linux/T2-Ubuntu/releases/download/${latest}/${iso}.zip > ${iso}.zip
+	curl -#L https://github.com/t2linux/T2-Mint/releases/download/${latest}/${iso}.zip > ${iso}.zip
 fi
 echo -e "\nCreating ISO"
 
@@ -105,7 +84,7 @@ mv $HOME/Downloads/repo/${iso}.iso $HOME/Downloads
 
 echo -e "\nVerifying sha256 checksums"
 
-actual_iso_chksum=$(curl -sL https://github.com/t2linux/T2-Ubuntu/releases/download/${latest}/sha256-${flavour}-$(echo ${ver} | cut -d " " -f 1) | cut -d " " -f 1)
+actual_iso_chksum=$(curl -sL https://github.com/t2linux/T2-Mint/releases/download/${latest}/sha256-${flavour}
 
 case "$os" in
 	(Darwin)

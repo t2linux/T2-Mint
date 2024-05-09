@@ -17,9 +17,11 @@ jobs:
           remove-android: 'true'
           remove-dotnet: 'true'
           remove-haskell: 'true'
+          remove-swapfile: 'true'
+          remove-codeql: 'true'
 
       - name: Build
-        run: sudo ./build.sh cinnamon
+        run: sudo ./build_in_docker.sh cinnamon
 
       - name: print sha256sum
         run: cat output/sha256*
@@ -76,9 +78,11 @@ jobs:
           remove-android: 'true'
           remove-dotnet: 'true'
           remove-haskell: 'true'
+          remove-swapfile: 'true'
+          remove-codeql: 'true'
 
       - name: Build
-        run: sudo ./build.sh mate
+        run: sudo ./build_in_docker.sh mate
 
       - name: print sha256sum
         run: cat output/sha256*
@@ -131,9 +135,11 @@ jobs:
           remove-android: 'true'
           remove-dotnet: 'true'
           remove-haskell: 'true'
+          remove-swapfile: 'true'
+          remove-codeql: 'true'
 
       - name: Build
-        run: sudo ./build.sh xfce
+        run: sudo ./build_in_docker.sh xfce
 
       - name: print sha256sum
         run: cat output/sha256*
