@@ -84,7 +84,7 @@ mv $HOME/Downloads/home/runner/work/T2-Mint/T2-Mint/${iso}.iso $HOME/Downloads
 
 echo -e "\nVerifying sha256 checksums"
 
-actual_iso_chksum=$(curl -sL https://github.com/t2linux/T2-Mint/releases/download/${latest}/sha256-${flavour}
+actual_iso_chksum=$(curl -sL https://github.com/t2linux/T2-Mint/releases/download/${latest}/sha256-${flavour} | cut -d " " -f 1)
 
 case "$os" in
 	(Darwin)
