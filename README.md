@@ -12,7 +12,7 @@ Apple T2 drivers are integrated with this iso.
 
 This repo is a based on [T2-Ubuntu](https://github.com/t2linux/T2-Ubuntu.git).
 
-Kernel is being used from - <https://github.com/t2linux/T2-Ubuntu-Kernel>
+Kernel is being used from - <https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel>
 
 Using additional patches to support T2 Macs - <https://github.com/t2linux/linux-t2-patches>
 
@@ -68,7 +68,7 @@ and then:
 
 ## Update to newer kernels
 
-Follow [this guide](https://github.com/t2linux/T2-Ubuntu-Kernel#pre-installation-steps).
+Follow [this guide](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel?tab=readme-ov-file#installation).
 
 ## Know issues
 
