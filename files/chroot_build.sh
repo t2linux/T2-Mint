@@ -32,10 +32,12 @@ echo >&2 "===]> Info: Install the T2 kernel... "
 apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
   linux-t2=KVER-PREL-${CODENAME}
 
-echo >&2 "===]> Info: Install sound configuration... "
+echo >&2 "===]> Info: Install sound configuration and Wi-Fi script... "
 
 apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
-  apple-t2-audio-config
+  apple-t2-audio-config \
+  dmg2img \
+  apple-firmware-script
 
 echo >&2 "===]> Info: Configure drivers... "
 
