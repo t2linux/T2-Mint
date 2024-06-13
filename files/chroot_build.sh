@@ -36,7 +36,6 @@ echo >&2 "===]> Info: Install sound configuration and Wi-Fi script... "
 
 apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
   apple-t2-audio-config \
-  dmg2img \
   apple-firmware-script
 
 echo >&2 "===]> Info: Configure drivers... "
