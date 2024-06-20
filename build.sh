@@ -99,14 +99,14 @@ do
     echo "Error building ${KERNEL_VERSION}-${ALTERNATIVE}"
     exit "${livecd_exitcode}"
   fi
-  ## Zip iso and split it into multiple parts - github max size of release attachment is 2GB, where ISO is sometimes bigger than that
+  ## Split iso into multiple parts - github max size of release attachment is 2GB, where ISO is sometimes bigger than that
   cd "${ROOT_PATH}"
-  zip -s 2000m "${ROOT_PATH}/output/linuxmint-${MINT_VERSION}-${FLAVOUR}-${KERNEL_VERSION}-${ALTERNATIVE}.zip" "${ROOT_PATH}/linuxmint-${MINT_VERSION}-${FLAVOUR}-${KERNEL_VERSION}-${ALTERNATIVE}.iso"
+  split -b 2000M -x "${ROOT_PATH}/linuxmint-${MINT_VERSION}-${FLAVOUR}-${KERNEL_VERSION}-${ALTERNATIVE}.iso" "${ROOT_PATH}/output/linuxmint-${MINT_VERSION}-${FLAVOUR}-${KERNEL_VERSION}-${ALTERNATIVE}.iso."
 done
 ## Calculate sha256 sums of built ISO
 sha256sum "${ROOT_PATH}"/*.iso >"${ROOT_PATH}/output/sha256-${FLAVOUR}"
 
 find ./ | grep ".iso"
-find ./ | grep ".zip"
+#find ./ | grep ".zip"
 
 exit "${livecd_exitcode}"
