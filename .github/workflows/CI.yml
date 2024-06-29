@@ -198,6 +198,16 @@ jobs:
       - name: 'Checkout Repo'
         uses: actions/checkout@v4
 
+      - name: Generate Variables
+        run: |
+          VER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
+          MINTVER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
+          REL=$(grep "PKGREL=\d*" build.sh | cut -d = -f2)
+          echo Version is $VER
+          echo "kver=${VER}" >> $GITHUB_ENV
+          echo "mintver=${MINTVER}" >> $GITHUB_ENV
+          echo "isotag=${VER}-${REL}" >> $GITHUB_ENV
+
       - name: Update the json
         if: github.ref == 'refs/heads/main'
         id: publish
