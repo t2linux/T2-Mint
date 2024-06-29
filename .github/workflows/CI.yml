@@ -30,8 +30,11 @@ jobs:
         id: tag
         run: |
           VER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
+          MINTVER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
           REL=$(grep "PKGREL=\d*" build.sh | cut -d = -f2)
           echo Version is $VER
+          echo "kver=${VER}" >> $GITHUB_ENV
+          echo "mintver=${MINTVER}" >> $GITHUB_ENV
           echo "isotag=${VER}-${REL}" >> $GITHUB_ENV
 
       - name: Upload iso artifact
@@ -91,8 +94,11 @@ jobs:
         id: tag
         run: |
           VER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
+          MINTVER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
           REL=$(grep "PKGREL=\d*" build.sh | cut -d = -f2)
           echo Version is $VER
+          echo "kver=${VER}" >> $GITHUB_ENV
+          echo "mintver=${MINTVER}" >> $GITHUB_ENV
           echo "isotag=${VER}-${REL}" >> $GITHUB_ENV
 
       - name: Upload iso artifact
@@ -148,8 +154,11 @@ jobs:
         id: tag
         run: |
           VER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
+          MINTVER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
           REL=$(grep "PKGREL=\d*" build.sh | cut -d = -f2)
           echo Version is $VER
+          echo "kver=${VER}" >> $GITHUB_ENV
+          echo "mintver=${MINTVER}" >> $GITHUB_ENV
           echo "isotag=${VER}-${REL}" >> $GITHUB_ENV
 
       - name: Upload iso artifact
@@ -181,3 +190,67 @@ jobs:
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+  Publish:
+    needs: [Cinnamon, XFCE, Mate]
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: 'Checkout Repo'
+        uses: actions/checkout@v4
+
+      - name: Update the json
+        if: github.ref == 'refs/heads/main'
+        id: publish
+        run: |
+          git clone https://github.com/t2linux/wiki.git
+          cd wiki/docs/tools
+
+          cat << EOF > update.py
+          import json
+
+          # Define the new links
+          new_link_cinnamon_1 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-cinnamon-${{ env.kver }}-t2-jammy.iso.00"
+          new_link_cinnamon_2 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-cinnamon-${{ env.kver }}-t2-jammy.iso.01"
+          new_link_mate_1 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-mate-${{ env.kver }}-t2-jammy.iso.00"
+          new_link_mate_2 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-mate-${{ env.kver }}-t2-jammy.iso.01"
+          new_link_xfce_1 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-xfce-${{ env.kver }}-t2-jammy.iso.00"
+          new_link_xfce_2 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-xfce-${{ env.kver }}-t2-jammy.iso.01"
+
+          # Load the JSON file
+          with open('distro-metadata.json', 'r') as file:
+              data = json.load(file)
+
+          # Function to update the links
+          def update_links(distros, name, new_links):
+              for distro in distros:
+                  if distro['name'] == name:
+                      distro['iso'] = new_links
+
+          # Update the links
+          update_links(data['all'], "Linux Mint - Cinnamon", [new_link_cinnamon_1, new_link_cinnamon_2])
+          update_links(data['all'], "Linux Mint - Mate", [new_link_mate_1, new_link_mate_2])
+          update_links(data['all'], "Linux Mint - XFCE", [new_link_xfce_1, new_link_xfce_2])
+
+          # Save the updated JSON back to the file
+          with open('distro-metadata.json', 'w') as file:
+              json.dump(data, file, indent=2)
+
+          print("Links updated successfully.")
+          EOF
+
+          python3 update.py
+          rm update.py
+          cd -
+      - name: Push changes to apt repo
+        if: github.ref == 'refs/heads/main'
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PAT }}
+        with:
+          source-directory: 'wiki'
+          destination-github-username: 't2linux'
+          destination-repository-name: 'wiki'
+          user-email: github-actions[bot]@users.noreply.github.com
+          user-name: github-actions[bot]
+          target-branch: master
+          commit-message: Distro metadata - Update Linux Mint ${{ env.mintver }} to v${{ env.isotag }}
