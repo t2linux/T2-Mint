@@ -30,7 +30,7 @@ jobs:
         id: tag
         run: |
           VER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
-          MINTVER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
+          MINTVER=$(egrep ^MINT_VERSION build.sh|cut -d= -f2)
           REL=$(grep "PKGREL=\d*" build.sh | cut -d = -f2)
           echo Version is $VER
           echo "kver=${VER}" >> $GITHUB_ENV
@@ -94,7 +94,7 @@ jobs:
         id: tag
         run: |
           VER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
-          MINTVER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
+          MINTVER=$(egrep ^MINT_VERSION build.sh|cut -d= -f2)
           REL=$(grep "PKGREL=\d*" build.sh | cut -d = -f2)
           echo Version is $VER
           echo "kver=${VER}" >> $GITHUB_ENV
@@ -154,7 +154,7 @@ jobs:
         id: tag
         run: |
           VER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
-          MINTVER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
+          MINTVER=$(egrep ^MINT_VERSION build.sh|cut -d= -f2)
           REL=$(grep "PKGREL=\d*" build.sh | cut -d = -f2)
           echo Version is $VER
           echo "kver=${VER}" >> $GITHUB_ENV
@@ -201,7 +201,7 @@ jobs:
       - name: Generate Variables
         run: |
           VER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
-          MINTVER=$(egrep ^KERNEL_VERSION build.sh|cut -d= -f2)
+          MINTVER=$(egrep ^MINT_VERSION build.sh|cut -d= -f2)
           REL=$(grep "PKGREL=\d*" build.sh | cut -d = -f2)
           echo Version is $VER
           echo "kver=${VER}" >> $GITHUB_ENV
