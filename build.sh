@@ -9,7 +9,7 @@ CODENAME=jammy
 FLAVOUR=$1
 MINT_VERSION=21.3
 KERNEL_VERSION=6.9.7
-PKGREL=1
+PKGREL=4
 sed -i "s/KVER/${KERNEL_VERSION}/g" $(pwd)/files/chroot_build.sh
 sed -i "s/PREL/${PKGREL}/g" $(pwd)/files/chroot_build.sh
 
