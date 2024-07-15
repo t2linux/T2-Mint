@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Free up disk space for the CI
-        uses: AdityaGarg8/remove-unwanted-software@v3
+        uses: AdityaGarg8/remove-unwanted-software@v4
         with:
           remove-android: 'true'
           remove-dotnet: 'true'
@@ -76,7 +76,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Free up disk space for the CI
-        uses: AdityaGarg8/remove-unwanted-software@v3
+        uses: AdityaGarg8/remove-unwanted-software@v4
         with:
           remove-android: 'true'
           remove-dotnet: 'true'
@@ -136,7 +136,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Free up disk space for the CI
-        uses: AdityaGarg8/remove-unwanted-software@v3
+        uses: AdityaGarg8/remove-unwanted-software@v4
         with:
           remove-android: 'true'
           remove-dotnet: 'true'
