@@ -5,11 +5,11 @@ ROOT_PATH=$(pwd)
 WORKING_PATH=/root/work
 CHROOT_PATH="${WORKING_PATH}/chroot"
 IMAGE_PATH="${WORKING_PATH}/image"
-CODENAME=jammy
+CODENAME=noble
 FLAVOUR=$1
-MINT_VERSION=21.3
-KERNEL_VERSION=6.9.7
-PKGREL=4
+MINT_VERSION=22
+KERNEL_VERSION=6.9.9
+PKGREL=1
 sed -i "s/KVER/${KERNEL_VERSION}/g" $(pwd)/files/chroot_build.sh
 sed -i "s/PREL/${PKGREL}/g" $(pwd)/files/chroot_build.sh
 
@@ -40,7 +40,7 @@ apt-get install -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="
   wget
 
 echo >&2 "===]> Info: Start loop... "
-for ALTERNATIVE in t2-jammy
+for ALTERNATIVE in t2-${CODENAME}
 do
   echo >&2 "===]> Info: Start building ${ALTERNATIVE}... "
 

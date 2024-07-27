@@ -62,8 +62,8 @@ case "$flavinput" in
 		;;
 esac
 
-iso="linuxmint-21.3-${flavour}-${latestkver}-t2-jammy"
-ver="Linux Mint 21.3 \"Virginia\" - ${flavourcap} Edition"
+iso="linuxmint-22-${flavour}-${latestkver}-t2-noble"
+ver="Linux Mint 22 \"Wilma\" - ${flavourcap} Edition"
 
 if [ ! -f ${iso}.iso.00 ]; then
 	echo -e "\nDownloading Part 1 for ${ver}"
