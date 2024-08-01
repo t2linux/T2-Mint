@@ -65,19 +65,11 @@ esac
 iso="linuxmint-22-${flavour}-${latestkver}-t2-noble"
 ver="Linux Mint 22 \"Wilma\" - ${flavourcap} Edition"
 
-if [ ! -f ${iso}.iso.00 ]; then
-	echo -e "\nDownloading Part 1 for ${ver}"
-	echo -e "\n"
-	curl -#L https://github.com/t2linux/T2-Mint/releases/download/${latest}/${iso}.iso.00 > ${iso}.iso.00
-fi
-if [ ! -f ${iso}.iso.01 ]; then
-	echo -e "\nDownloading Part 2 for ${ver}"
-	echo -e "\n"
-	curl -#L https://github.com/t2linux/T2-Mint/releases/download/${latest}/${iso}.iso.01 > ${iso}.iso.01
-fi
-echo -e "\nCreating ISO"
+echo -e "\nDownloading Part 1 for ${ver}\n"
+curl -#L https://github.com/t2linux/T2-Mint/releases/download/${latest}/${iso}.iso.00 > ${iso}.iso
 
-cat ${iso}.iso.* > ${iso}.iso
+echo -e "\nDownloading Part 2 for ${ver}\n"
+curl -#L https://github.com/t2linux/T2-Mint/releases/download/${latest}/${iso}.iso.01 >> ${iso}.iso
 
 echo -e "\nVerifying sha256 checksums"
 
@@ -100,13 +92,6 @@ if [[ ${actual_iso_chksum} != ${downloaded_iso_chksum} ]]
 then
 echo -e "\nError: Failed to verify sha256 checksums of the ISO"
 rm $HOME/Downloads/${iso}.iso
-fi
-
-rm $HOME/Downloads/${iso}.iso.00
-rm $HOME/Downloads/${iso}.iso.01
-
-if [[ ${actual_iso_chksum} != ${downloaded_iso_chksum} ]]
-then
 exit 1
 fi
 
