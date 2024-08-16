@@ -8,6 +8,6 @@ Once you're booted and in your desktop, run `get-apple-firmware` and choose the 
 
 If this method doesn't work, follow [this guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get firmware for Wi-Fi and Bluetooth.
 
-## Adding support for Touch Bar:
+## Adding support for customisable Touch Bar:
 
-If your Mac has a Touch Bar, install `tiny-dfr` by running `sudo apt update && sudo apt install tiny-dfr`
+If your Mac has a Touch Bar, and you want to customise it, install `tiny-dfr` by running `sudo apt update && sudo apt install tiny-dfr`. After installing restart your Mac and run `sudo touchbar` to customise.
