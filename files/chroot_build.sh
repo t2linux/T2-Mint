@@ -62,6 +62,11 @@ apt-get purge -y -qq \
 
 apt-get autoremove -y
 
+echo >&2 "===]> Info: Add udev Rule for AMD GPU Power Management... "
+cat <<EOF > /etc/udev/rules.d/30-amdgpu-pm.rules
+KERNEL=="card[012]", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="low"
+EOF
+
 echo >&2 "===]> Info: Cleanup the chroot environment... "
 
 truncate -s 0 /etc/machine-id || true
