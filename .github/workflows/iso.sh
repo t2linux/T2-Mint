@@ -27,7 +27,8 @@ set -e
 
 cd $HOME/Downloads
 
-latest=$(curl -sL https://github.com/t2linux/T2-Mint/releases/latest/ | grep "<title>Release" | awk -F " " '{print $2}' )
+#latest=$(curl -sL https://github.com/t2linux/T2-Mint/releases/latest/ | grep "<title>Release" | awk -F " " '{print $2}' )
+latest=GITHUBRELEASE
 latestkver=$(echo $latest | cut -d "v" -f 2 | cut -d "-" -f 1)
 
 cat <<EOF

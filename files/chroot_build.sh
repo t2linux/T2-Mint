@@ -15,7 +15,7 @@ echo >&2 "===]> Info: Upgrade the system... "
 
 apt-get update
 export DEBIAN_FRONTEND=noninteractive
-apt-get upgrade -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+#apt-get upgrade -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
 
 echo >&2 "===]> Info: Install Ubuntu MBP Repo... "
 
@@ -47,18 +47,6 @@ echo >&2 "===]> Info: Update initramfs... "
 ## Add custom drivers to be loaded at boot
 /usr/sbin/depmod -a "${KERNEL_VERSION}"
 update-initramfs -u -v -k "${KERNEL_VERSION}"
-
-echo >&2 "===]> Info: Remove unused applications ... "
-
-apt-get purge -y -qq \
-  linux-generic \
-  linux-headers-6.8.0-31 \
-  linux-headers-6.8.0-31-generic \
-  linux-headers-generic \
-  linux-image-6.8.0-31-generic \
-  linux-image-generic \
-  linux-modules-6.8.0-31-generic \
-  linux-modules-extra-6.8.0-31-generic
 
 apt-get autoremove -y
 

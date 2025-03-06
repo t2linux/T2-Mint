@@ -55,6 +55,7 @@ jobs:
 
       - name: Get the ISO script
         run: |
+          sudo sed -i 's/GITHUBRELEASE/v${{ env.isotag }}/g' ${{ github.workspace }}/.github/workflows/iso.sh
           sudo cp ${{ github.workspace }}/.github/workflows/iso.sh ${{ github.workspace }}/output/iso.sh
 
       - name: Release
