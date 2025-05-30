@@ -55,6 +55,16 @@ cat <<EOF > /etc/udev/rules.d/30-amdgpu-pm.rules
 KERNEL=="card[012]", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="low"
 EOF
 
+echo >&2 "===]> Info: Add udev Rule to stop annoying WiFi popup... "
+cat <<EOF | sudo tee /etc/udev/rules.d/99-network-t2-ncm.rules
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="ac:de:48:00:11:22", NAME="t2_ncm"
+EOF
+
+cat <<EOF | sudo tee /etc/NetworkManager/conf.d/99-network-t2-ncm.conf
+[main]
+no-auto-default=t2_ncm
+EOF
+
 echo >&2 "===]> Info: Cleanup the chroot environment... "
 
 truncate -s 0 /etc/machine-id || true
