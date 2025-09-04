@@ -37,7 +37,7 @@ done
 
 echo >&2 "===]> Info: Create diskdefines... "
 cat <<EOF >"${IMAGE_PATH}"/README.diskdefines
-#define DISKNAME  Linux Mint MBP ${MINT_VERSION} "Xia" - Beta amd64
+#define DISKNAME  Linux Mint T2 ${MINT_VERSION} "Zara" - amd64
 #define TYPE  binary
 #define TYPEbinary  1
 #define ARCH  amd64

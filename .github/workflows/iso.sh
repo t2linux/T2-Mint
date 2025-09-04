@@ -63,8 +63,8 @@ case "$flavinput" in
 		;;
 esac
 
-iso="linuxmint-22.1-${flavour}-${latestkver}-t2-noble"
-ver="Linux Mint 22.1 \"Xia\" - ${flavourcap} Edition"
+iso="linuxmint-22.2-${flavour}-${latestkver}-t2-noble"
+ver="Linux Mint 22.2 \"Zara\" - ${flavourcap} Edition"
 
 echo -e "\nDownloading Part 1 for ${ver}\n"
 curl -#L https://github.com/t2linux/T2-Mint/releases/download/${latest}/${iso}.iso.00 > ${iso}.iso

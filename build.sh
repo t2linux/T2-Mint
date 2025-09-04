@@ -7,8 +7,8 @@ CHROOT_PATH="${WORKING_PATH}/chroot"
 IMAGE_PATH="${WORKING_PATH}/image"
 CODENAME=noble
 FLAVOUR=$1
-MINT_VERSION=22.1
-KERNEL_VERSION=6.15.8
+MINT_VERSION=22.2
+KERNEL_VERSION=6.16.4
 PKGREL=1
 sed -i "s/KVER/${KERNEL_VERSION}/g" $(pwd)/files/chroot_build.sh
 sed -i "s/PREL/${PKGREL}/g" $(pwd)/files/chroot_build.sh
