@@ -9,7 +9,7 @@ jobs:
   Cinnamon:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Free up disk space for the CI
         uses: AdityaGarg8/remove-unwanted-software@v5
@@ -74,7 +74,7 @@ jobs:
   Mate:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Free up disk space for the CI
         uses: AdityaGarg8/remove-unwanted-software@v5
@@ -134,7 +134,7 @@ jobs:
   XFCE:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Free up disk space for the CI
         uses: AdityaGarg8/remove-unwanted-software@v5
@@ -197,7 +197,7 @@ jobs:
     steps:
 
       - name: 'Checkout Repo'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Generate Variables
         run: |
