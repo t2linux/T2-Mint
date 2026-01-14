@@ -65,6 +65,12 @@ cat <<EOF | sudo tee /etc/NetworkManager/conf.d/99-network-t2-ncm.conf
 no-auto-default=t2_ncm
 EOF
 
+echo >&2 "===]> Info: Setup auto-fetch firmware service... "
+
+curl -s https://raw.githubusercontent.com/t2linux/wiki/refs/heads/master/docs/tools/get-apple-firmware.service -o /etc/systemd/system/get-apple-firmware.service
+
+systemctl enable get-apple-firmware.service
+
 echo >&2 "===]> Info: Cleanup the chroot environment... "
 
 truncate -s 0 /etc/machine-id || true
