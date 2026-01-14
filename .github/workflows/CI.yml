@@ -220,12 +220,12 @@ jobs:
           import json
 
           # Define the new links
-          new_link_cinnamon_1 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-cinnamon-${{ env.kver }}-t2-jammy.iso.00"
-          new_link_cinnamon_2 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-cinnamon-${{ env.kver }}-t2-jammy.iso.01"
-          new_link_mate_1 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-mate-${{ env.kver }}-t2-jammy.iso.00"
-          new_link_mate_2 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-mate-${{ env.kver }}-t2-jammy.iso.01"
-          new_link_xfce_1 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-xfce-${{ env.kver }}-t2-jammy.iso.00"
-          new_link_xfce_2 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-xfce-${{ env.kver }}-t2-jammy.iso.01"
+          new_link_cinnamon_1 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-cinnamon-${{ env.kver }}-t2-noble.iso.00"
+          new_link_cinnamon_2 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-cinnamon-${{ env.kver }}-t2-noble.iso.01"
+          new_link_mate_1 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-mate-${{ env.kver }}-t2-noble.iso.00"
+          new_link_mate_2 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-mate-${{ env.kver }}-t2-noble.iso.01"
+          new_link_xfce_1 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-xfce-${{ env.kver }}-t2-noble.iso.00"
+          new_link_xfce_2 = "https://github.com/t2linux/T2-Mint/releases/download/v${{ env.isotag }}/linuxmint-${{ env.mintver }}-xfce-${{ env.kver }}-t2-noble.iso.01"
 
           # Load the JSON file
           with open('distro-metadata.json', 'r') as file:
