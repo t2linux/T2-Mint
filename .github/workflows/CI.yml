@@ -24,7 +24,10 @@ jobs:
         run: sudo ./build.sh cinnamon
 
       - name: print sha256sum
-        run: cat output/sha256*
+        run: |
+          cat output/sha256*
+          SHA256=$(cat output/sha256* | cut -d " " -f 1)
+          echo "sha256cinnamon=${SHA256}" >> $GITHUB_ENV
 
       - name: Generate Tag
         id: tag
@@ -89,7 +92,10 @@ jobs:
         run: sudo ./build.sh mate
 
       - name: print sha256sum
-        run: cat output/sha256*
+        run: |
+          cat output/sha256*
+          SHA256=$(cat output/sha256* | cut -d " " -f 1)
+          echo "sha256mate=${SHA256}" >> $GITHUB_ENV
 
       - name: Generate Tag
         id: tag
@@ -149,7 +155,10 @@ jobs:
         run: sudo ./build.sh xfce
 
       - name: print sha256sum
-        run: cat output/sha256*
+        run: |
+          cat output/sha256*
+          SHA256=$(cat output/sha256* | cut -d " " -f 1)
+          echo "sha256xfce=${SHA256}" >> $GITHUB_ENV
 
       - name: Generate Tag
         id: tag
@@ -232,15 +241,16 @@ jobs:
               data = json.load(file)
 
           # Function to update the links
-          def update_links(distros, name, new_links):
+          def update_links(distros, name, new_links, sha256):
               for distro in distros:
                   if distro['name'] == name:
                       distro['iso'] = new_links
+                      distro['sha256'] = sha256
 
           # Update the links
-          update_links(data['all'], "Linux Mint - Cinnamon", [new_link_cinnamon_1, new_link_cinnamon_2])
-          update_links(data['all'], "Linux Mint - Mate", [new_link_mate_1, new_link_mate_2])
-          update_links(data['all'], "Linux Mint - XFCE", [new_link_xfce_1, new_link_xfce_2])
+          update_links(data['all'], "Linux Mint - Cinnamon", [new_link_cinnamon_1, new_link_cinnamon_2], "${{ env.sha256cinnamon }}")
+          update_links(data['all'], "Linux Mint - Mate", [new_link_mate_1, new_link_mate_2], "${{ env.sha256mate }}")
+          update_links(data['all'], "Linux Mint - XFCE", [new_link_xfce_1, new_link_xfce_2], "${{ env.sha256xfce }}")
 
           # Save the updated JSON back to the file
           with open('distro-metadata.json', 'w') as file:
