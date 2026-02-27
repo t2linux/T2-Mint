@@ -41,7 +41,7 @@ jobs:
           echo "isotag=${VER}-${REL}" >> $GITHUB_ENV
 
       - name: Upload iso artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: mbp-linuxmint-cinnamon-${{ steps.tag.outputs.tag }}.z01
           path: ${{ github.workspace }}/output/*
@@ -109,7 +109,7 @@ jobs:
           echo "isotag=${VER}-${REL}" >> $GITHUB_ENV
 
       - name: Upload iso artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: mbp-linuxmint-mate-${{ steps.tag.outputs.tag }}.z01
           path: ${{ github.workspace }}/output/*
@@ -172,7 +172,7 @@ jobs:
           echo "isotag=${VER}-${REL}" >> $GITHUB_ENV
 
       - name: Upload iso artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: mbp-linuxmint-xfce-${{ steps.tag.outputs.tag }}.z01
           path: ${{ github.workspace }}/output/*
