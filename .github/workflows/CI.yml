@@ -43,8 +43,9 @@ jobs:
       - name: Upload iso artifact
         uses: actions/upload-artifact@v7
         with:
-          name: mbp-linuxmint-cinnamon-${{ steps.tag.outputs.tag }}.z01
-          path: ${{ github.workspace }}/output/*
+          name: ISO-Cinnamon
+          path: ${{ github.workspace }}/linuxmint-${{ env.mintver }}-cinnamon-${{ env.kver }}-t2-noble
+          archive: false
 
       - name: Instructions for putting it back together
         run: |
@@ -111,8 +112,9 @@ jobs:
       - name: Upload iso artifact
         uses: actions/upload-artifact@v7
         with:
-          name: mbp-linuxmint-mate-${{ steps.tag.outputs.tag }}.z01
-          path: ${{ github.workspace }}/output/*
+          name: ISO-Mate
+          path: ${{ github.workspace }}/linuxmint-${{ env.mintver }}-mate-${{ env.kver }}-t2-noble
+          archive: false
 
       - name: Instructions for putting it back together
         run: |
@@ -174,8 +176,9 @@ jobs:
       - name: Upload iso artifact
         uses: actions/upload-artifact@v7
         with:
-          name: mbp-linuxmint-xfce-${{ steps.tag.outputs.tag }}.z01
-          path: ${{ github.workspace }}/output/*
+          name: ISO-XFCE
+          path: ${{ github.workspace }}/linuxmint-${{ env.mintver }}-xfce-${{ env.kver }}-t2-noble.iso
+          archive: false
 
       - name: Instructions for putting it back together
         run: |
