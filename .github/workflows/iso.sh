@@ -57,7 +57,7 @@ case "$flavinput" in
 		;;
 	(3)
 		flavour=mate
-    		flavourcap=MATE
+    	flavourcap=MATE
 		;;
 	(*)
 		echo "Invalid input. Aborting!"
