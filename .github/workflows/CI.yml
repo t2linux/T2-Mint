@@ -78,7 +78,7 @@ jobs:
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  Mate:
+  MATE:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
@@ -207,7 +207,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
   Publish:
-    needs: [Cinnamon, XFCE, Mate]
+    needs: [Cinnamon, XFCE, MATE]
     runs-on: ubuntu-latest
     steps:
 
@@ -264,7 +264,7 @@ jobs:
 
           # Update the links
           update_links(data['all'], "Linux Mint - Cinnamon", [new_link_cinnamon_1, new_link_cinnamon_2], "${{ env.sha256cinnamon }}")
-          update_links(data['all'], "Linux Mint - Mate", [new_link_mate_1, new_link_mate_2], "${{ env.sha256mate }}")
+          update_links(data['all'], "Linux Mint - MATE", [new_link_mate_1, new_link_mate_2], "${{ env.sha256mate }}")
           update_links(data['all'], "Linux Mint - XFCE", [new_link_xfce_1, new_link_xfce_2], "${{ env.sha256xfce }}")
 
           # Save the updated JSON back to the file
