@@ -67,7 +67,7 @@ jobs:
 
       - name: Release
         if: github.ref == 'refs/heads/main'
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           #files: ${{ github.workspace }}/ISO/*.tar.gz
           #files: ${{ github.workspace }}/ISO/*.iso
@@ -131,7 +131,7 @@ jobs:
 
       - name: Release
         if: github.ref == 'refs/heads/main'
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           #files: ${{ github.workspace }}/ISO/*.tar.gz
           #files: ${{ github.workspace }}/ISO/*.iso
@@ -195,7 +195,7 @@ jobs:
 
       - name: Release
         if: github.ref == 'refs/heads/main'
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           #files: ${{ github.workspace }}/ISO/*.tar.gz
           #files: ${{ github.workspace }}/ISO/*.iso
