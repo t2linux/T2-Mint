@@ -38,6 +38,8 @@ IF "%flavinput%"=="1" (
             SET flavourcap=MATE
         ) ELSE (
             ECHO Invalid input. Aborting!
+            ECHO Press any key to exit . . .
+            PAUSE>nul
             EXIT
         )
     )
@@ -81,8 +83,12 @@ IF "%actual_iso_chksum%" NEQ "%downloaded_iso_chksum%" (
     ECHO.
     ECHO Error: Failed to verify sha256 checksums of the ISO
     DEL %downloads%\%iso%.iso
+    ECHO Press any key to exit . . .
+    PAUSE>nul
     EXIT
 )
 
 ECHO.
 ECHO ISO saved to Downloads
+ECHO Press any key to exit . . .
+PAUSE>nul
