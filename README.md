@@ -79,11 +79,19 @@ Follow [this guide](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel?tab=r
 - Dynamic audio input/output change (on connecting/disconnecting headphones jack)
 - TouchID
 - Thunderbolt (is disabled, because driver was causing kernel panics (not tested with 5.5 kernel))
+  - Update: a user has confirmed that Thunderbolt works on a Mac mini (2018) with the 7.x kernels, including booting from a Thunderbolt drive. Devices must be authorized first, see [Known issues](#known-issues).
 - Microphone (it's recognised with new apple t2 sound driver, but there is a low mic volume amp)
 
 ## Known issues
 
 - `ctrl+x` is not working in GRUB, so if you are trying to change kernel parameters - start your OS by pressing `F10` on external keyboard
+- Thunderbolt: connected devices must be authorized before use because the security level is `user`. Use `boltctl` (e.g. `boltctl enroll --policy auto <UUID>`) to authorize a device and remember it.
+- If the root filesystem is on a Thunderbolt drive, the drive must be authorized inside the initramfs, otherwise boot stops at the `(initramfs)` prompt. A udev rule in `/etc/udev/rules.d/` that authorizes the drive is copied into the initramfs by `update-initramfs -u`, for example:
+```
+# /etc/udev/rules.d/99-thunderbolt-root-auth.rules
+ACTION=="add", SUBSYSTEM=="thunderbolt", ATTR{unique_id}=="<unique_id of the drive>", ATTR{authorized}=="0", ATTR{authorized}="1"
+```
+  The value can be read from `/sys/bus/thunderbolt/devices/<device>/unique_id`. Note that `unique_id` is reported by the device itself, so this weakens the protection that authorization provides.
 
 ## Docs
 
