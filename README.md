@@ -78,8 +78,6 @@ Follow [this guide](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel?tab=r
 
 - Dynamic audio input/output change (on connecting/disconnecting headphones jack)
 - TouchID
-- Thunderbolt (is disabled, because driver was causing kernel panics (not tested with 5.5 kernel))
-  - Update: a user has confirmed that Thunderbolt works on a Mac mini (2018) with the 7.x kernels, including booting from a Thunderbolt drive. Devices must be authorized first, see [Known issues](#known-issues).
 - Microphone (it's recognised with new apple t2 sound driver, but there is a low mic volume amp)
 
 ## Known issues
